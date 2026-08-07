@@ -28,6 +28,14 @@ export async function POST(req: NextRequest) {
   const subject = (data.subject as string) ?? '(no subject)'
   const body = (data.text as string) ?? (data.html as string) ?? '(empty body)'
 
+  // Loop guard: never ingest our own outbound mail. Without this, an approved
+  // reply addressed to support@ re-enters the pipeline and ping-pongs forever.
+  const lower = fromEmail.toLowerCase()
+  if (lower.includes('@speakify.dev') || lower === 'unknown') {
+    console.warn('[support/inbound] ignoring self/unknown sender:', fromEmail)
+    return NextResponse.json({ ok: true, ignored: true })
+  }
+
   const ticketId = crypto.randomUUID()
   const customer = await lookupCustomer(fromEmail)
   const draft = await draftReply(fromEmail, subject, body, customer)

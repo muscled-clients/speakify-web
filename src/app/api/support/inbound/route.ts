@@ -18,6 +18,9 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 })
   }
 
+  // Temporary diagnostic: Resend's email.received payload shape is being confirmed.
+  console.log('[support/inbound] raw payload:', JSON.stringify(payload).slice(0, 2000))
+
   // Resend inbound wraps the email in `data`; tolerate both shapes.
   const data = (payload.data ?? payload) as Record<string, unknown>
   const fromRaw = data.from

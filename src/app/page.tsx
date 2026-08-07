@@ -5,6 +5,7 @@ import { BeforeAfter } from "@/components/sections/BeforeAfter";
 import { Features } from "@/components/sections/Features";
 import { HowItWorks } from "@/components/sections/HowItWorks";
 import { FeatureShowcase } from "@/components/sections/FeatureShowcase";
+import { Shortcuts } from "@/components/sections/Shortcuts";
 import { Comparison } from "@/components/sections/Comparison";
 import { Privacy } from "@/components/sections/Privacy";
 import { Platforms } from "@/components/sections/Platforms";
@@ -23,6 +24,7 @@ export default function Home() {
         <Features />
         <FeatureShowcase />
         <HowItWorks />
+        <Shortcuts />
         <Comparison />
         <Privacy />
         <Platforms />

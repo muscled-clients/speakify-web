@@ -38,8 +38,8 @@ export default function Terms() {
 
           <H2>Subscription and billing</H2>
           <ul className="list-disc pl-5 mb-4">
-            <LI>Speakify costs $20 USD per month after a 3-day free trial.</LI>
-            <LI>A payment method is required to start the trial. You will not be charged if you cancel before the trial ends.</LI>
+            <LI>Speakify costs $20 USD per month, charged when you subscribe.</LI>
+            <LI>Your first charge has a 14-day money-back guarantee: contact support for a full refund.</LI>
             <LI>Subscriptions renew automatically each month until canceled.</LI>
             <LI>You can cancel anytime from your account page. Access continues to the end of the paid period.</LI>
             <LI>Prices may change; we will give at least 30 days notice before any change affects you.</LI>

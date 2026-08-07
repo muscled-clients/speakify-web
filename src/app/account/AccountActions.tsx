@@ -46,7 +46,7 @@ export default function AccountActions({
       >
         {loading
           ? "One moment…"
-          : label ?? (kind === "checkout" ? "Start 3-Day Free Trial" : "Manage Subscription")}
+          : label ?? (kind === "checkout" ? "Subscribe for $20/month" : "Manage Subscription")}
       </button>
       {error && <p className="text-xs text-red-400 mt-3">{error}</p>}
     </div>

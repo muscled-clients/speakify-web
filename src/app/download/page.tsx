@@ -12,7 +12,7 @@ const STEPS = [
   {
     icon: CreditCard,
     title: "Start your trial",
-    text: "Sign in with Google and add a card. 3 days free, cancel anytime before day 4.",
+    text: "Sign in with Google and subscribe for $20/month.",
   },
   {
     icon: DownloadIcon,
@@ -63,16 +63,11 @@ export default async function Download() {
             </div>
           ) : (
             <div className="flex flex-col items-center gap-4 mb-20">
-              <div className="flex flex-col sm:flex-row items-center gap-4">
-                <Button href="/start?plan=trial" variant="primary" size="lg">
-                  Start 3-Day Free Trial
-                </Button>
-                <Button href="/start?plan=now" variant="secondary" size="lg">
-                  Skip the trial, subscribe now
-                </Button>
-              </div>
+              <Button href="/start?plan=now" variant="primary" size="lg">
+                Subscribe for $20/month
+              </Button>
               <p className="text-xs text-zinc-600">
-                $20/month either way. The download unlocks right after checkout.
+                The download unlocks right after checkout.
               </p>
               {!session?.user && (
                 <p className="text-xs text-zinc-600">

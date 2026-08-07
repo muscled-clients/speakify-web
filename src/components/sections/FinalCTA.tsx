@@ -12,19 +12,19 @@ export function FinalCTA() {
           Start speaking. Stop typing.
         </h2>
         <p className="text-lg text-zinc-400 max-w-xl mx-auto mb-10">
-          Try Speakify free for 3 days and experience voice-to-text that actually respects your privacy.
+          Get Speakify and experience voice-to-text that actually respects your privacy.
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Button href="/start?plan=trial" variant="primary" size="lg">
+          <Button href="/start?plan=now" variant="primary" size="lg">
             <Download className="w-5 h-5" />
-            Start Free Trial
+            Subscribe for $20/month
           </Button>
           <Button href="/pricing" variant="secondary" size="lg">
             See Pricing
           </Button>
         </div>
         <p className="text-xs text-zinc-600 mt-6">
-          macOS 14+ on Apple Silicon. ~140MB download. $20/month after trial, cancel anytime.
+          macOS 14+ on Apple Silicon. ~140MB download. $20/month, cancel anytime.
         </p>
       </div>
     </section>

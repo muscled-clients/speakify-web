@@ -6,9 +6,9 @@ import { ChevronDown } from "lucide-react";
 
 const FAQS = [
   {
-    question: "How does the free trial work?",
+    question: "How does billing work?",
     answer:
-      "You get full access to everything for 3 days. A card is required to start, but you won't be charged until day 4. Cancel anytime before then and you pay nothing. Cancellation is self-serve from your account page.",
+      "It's $20/month, charged when you subscribe. Cancel anytime from your account page, self-serve, and access continues to the end of the billing period. Your first charge has a 14-day money-back guarantee.",
   },
   {
     question: "What if it doesn't work for me?",

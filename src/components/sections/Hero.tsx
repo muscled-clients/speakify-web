@@ -33,16 +33,16 @@ export function Hero() {
 
         {/* CTA buttons */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-4">
-          <Button href="/start?plan=trial" variant="primary" size="lg">
+          <Button href="/start?plan=now" variant="primary" size="lg">
             <Download className="w-5 h-5" />
-            Start Free Trial
+            Get Speakify
           </Button>
           <Button href="#features" variant="secondary" size="lg">
             See Features
             <ArrowRight className="w-4 h-4" />
           </Button>
         </div>
-        <p className="text-sm text-zinc-500 mb-16">3 days free, then $20/month. Cancel anytime.</p>
+        <p className="text-sm text-zinc-500 mb-16">$20/month. Cancel anytime. 14-day money-back guarantee.</p>
 
         {/* App mockup: recording window */}
         <div className="relative max-w-2xl mx-auto">

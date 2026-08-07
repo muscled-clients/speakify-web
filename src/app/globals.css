@@ -39,3 +39,60 @@ body {
 .accordion-content > div {
   overflow: hidden;
 }
+
+/* Shortcuts section: typing caret and shortcode expansion */
+@keyframes sc-caret-blink {
+  0%,
+  45% {
+    opacity: 1;
+  }
+  55%,
+  100% {
+    opacity: 0;
+  }
+}
+.sc-caret {
+  animation: sc-caret-blink 1s steps(1, end) infinite;
+}
+
+@keyframes sc-snap-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.94);
+    filter: blur(4px);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.012);
+    filter: blur(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+}
+.sc-snap-in {
+  display: inline-block;
+  transform-origin: left center;
+  animation: sc-snap-in 0.34s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes sc-fade-out {
+  to {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+.sc-fade-out {
+  display: inline-block;
+  animation: sc-fade-out 0.42s ease-in both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sc-caret,
+  .sc-snap-in,
+  .sc-fade-out {
+    animation: none;
+  }
+}

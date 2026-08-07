@@ -24,7 +24,7 @@ export default function Pricing() {
             One plan. Everything included.
           </h1>
           <p className="text-lg text-zinc-400 max-w-xl mx-auto">
-            Try everything free for 3 days. Cancel anytime from your account page, no emails and no hoops.
+            One plan, everything included. Cancel anytime from your account page, no emails and no hoops.
           </p>
         </div>
 
@@ -35,7 +35,7 @@ export default function Pricing() {
               <span className="text-5xl font-bold text-zinc-100">$20</span>
               <span className="text-lg text-zinc-500">/month</span>
             </div>
-            <p className="text-sm text-zinc-500 text-center mb-8">after a 3-day free trial</p>
+            <p className="text-sm text-zinc-500 text-center mb-8">billed monthly, cancel anytime</p>
 
             <ul className="space-y-3 mb-8 text-left">
               {FEATURES.map((f) => (
@@ -46,16 +46,11 @@ export default function Pricing() {
               ))}
             </ul>
 
-            <Button href="/start?plan=trial" variant="primary" size="lg" className="w-full">
-              Start 3-Day Free Trial
+            <Button href="/start?plan=now" variant="primary" size="lg" className="w-full">
+              Subscribe for $20/month
             </Button>
-            <p className="text-center mt-3">
-              <a href="/start?plan=now" className="text-sm text-blue-400 hover:underline">
-                Convinced already? Skip the trial and subscribe now
-              </a>
-            </p>
             <p className="text-xs text-zinc-600 text-center mt-4">
-              Card required to start. You won&apos;t be charged until day 4, and there is a 14-day money-back guarantee after your first charge. Licensed for your personal Macs.
+              There is a 14-day money-back guarantee on your first charge. Licensed for your personal Macs.
             </p>
           </div>
         </div>

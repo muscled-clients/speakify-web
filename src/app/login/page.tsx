@@ -45,7 +45,7 @@ export default function Login() {
           </button>
 
           <p className="text-xs text-zinc-600 mt-6">
-            New here? Signing in creates your account. You'll start your 7-day free trial on the next page.
+            New here? Signing in creates your account. Add a card on the next page to start your 7-day free trial.
           </p>
         </div>
       </div>

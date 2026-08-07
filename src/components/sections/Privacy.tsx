@@ -2,7 +2,7 @@ import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { Shield, Server, Eye, Lock } from "lucide-react";
 
 const PRIVACY_POINTS = [
-  { icon: Server, text: "No servers or cloud infrastructure" },
+  { icon: Server, text: "Your voice and words never touch a server" },
   { icon: Eye, text: "No telemetry or analytics whatsoever" },
   { icon: Lock, text: "Audio processed in memory, never saved" },
   { icon: Shield, text: "Verify it yourself with any network monitor" },

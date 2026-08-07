@@ -48,5 +48,8 @@ for (const sub of subs) {
 
 await pool.query('DELETE FROM "user" WHERE id = $1', [user.id])
 console.log('  User row deleted (sessions, accounts, subscriptions, devices cascade)')
+// verification rows are keyed by identifier (email), not userId — clear them explicitly
+await pool.query('DELETE FROM verification WHERE identifier = $1', [user.email])
+console.log('  Verification tokens cleared')
 await pool.end()
 console.log('Done. Reply to the requester confirming deletion.')

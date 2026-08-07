@@ -12,7 +12,7 @@ const STEPS = [
   {
     icon: KeyRound,
     title: "Sign in with Google",
-    text: "Launch Speakify and sign in to start your 7-day free trial.",
+    text: "Launch Speakify and sign in. Then add a card to start your 7-day free trial.",
   },
   {
     icon: Mic,

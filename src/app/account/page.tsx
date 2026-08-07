@@ -56,7 +56,9 @@ export default async function Account({
             <div className="flex items-center gap-3 bg-green-500/10 border border-green-500/30 rounded-xl px-5 py-4 mb-8">
               <CheckCircle2 className="w-5 h-5 text-green-400 shrink-0" />
               <p className="text-sm text-zinc-200">
-                Your trial has started. You're all set. Return to the Speakify app on your Mac and it unlocks within a few minutes.
+                {sub?.status === "trialing"
+                  ? "Your trial has started. You're all set. Return to the Speakify app on your Mac and it unlocks within a few minutes."
+                  : "You're subscribed. Return to the Speakify app on your Mac and it unlocks within a few minutes."}
               </p>
             </div>
           )}

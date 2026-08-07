@@ -4,11 +4,11 @@
     <title>Speakify Updates</title>
     <item>
       <title>Speakify 1.0.0</title>
-      <pubDate>Fri, 07 Aug 2026 15:49:28 +0000</pubDate>
-      <sparkle:version>13</sparkle:version>
+      <pubDate>Fri, 07 Aug 2026 19:38:06 +0000</pubDate>
+      <sparkle:version>14</sparkle:version>
       <sparkle:shortVersionString>1.0.0</sparkle:shortVersionString>
       <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
-      <enclosure url="https://github.com/muscled-clients/speakify-web/releases/download/v1.0.0/Speakify.dmg" sparkle:edSignature="MYy/Aksf8nzE6PqoHohcReLysD2mAaEXIV3oZ7FTk9S5ZyXC7r/Yfg12YmtIuw0zt09EMQhrHueKDuAanPsxAA==" length="140744139" type="application/octet-stream"/>
+      <enclosure url="https://github.com/muscled-clients/speakify-web/releases/download/v1.0.0/Speakify.dmg" sparkle:edSignature="rauH+Wh0mYlJr9bxV8E111A9rdmPN1Yjro54NRWwge/DlqqlYWzENq0UgqozoS8rignYeP7VxMODLCHbN+B8Cg==" length="140744159" type="application/octet-stream"/>
     </item>
   </channel>
 </rss>

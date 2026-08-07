@@ -1,5 +1,6 @@
 import { betterAuth } from 'better-auth'
 import { nextCookies } from 'better-auth/next-js'
+import { bearer } from 'better-auth/plugins'
 import { Pool } from 'pg'
 
 const pool = new Pool({
@@ -39,7 +40,7 @@ export const auth = betterAuth({
     cookieCache: { enabled: true },
   },
 
-  plugins: [nextCookies()],
+  plugins: [nextCookies(), bearer()],
 
   // Missing secret is an error at auth-op time, not at import time — this file is imported
   // during `next build` when env vars aren't populated, and we don't want that to blow up.

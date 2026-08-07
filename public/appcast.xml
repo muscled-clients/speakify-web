@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle">
+  <channel>
+    <title>Speakify Updates</title>
+    <item>
+      <title>Speakify 1.0.0</title>
+      <pubDate>Fri, 07 Aug 2026 14:53:02 +0000</pubDate>
+      <sparkle:version>11</sparkle:version>
+      <sparkle:shortVersionString>1.0.0</sparkle:shortVersionString>
+      <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+      <enclosure url="https://github.com/muscled-clients/speakify-web/releases/download/v1.0.0/Speakify.dmg" sparkle:edSignature="gCyQ96BcyFBdjfK9e8tnTHIAKf0HomA+wdDvoQrG+2P0VmBeibWgTHcMJHTI4ZILj7N8r3d3qV4R6yUF6aPKBg==" length="140743182" type="application/octet-stream"/>
+    </item>
+  </channel>
+</rss>

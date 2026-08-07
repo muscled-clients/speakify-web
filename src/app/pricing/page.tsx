@@ -1,51 +1,62 @@
-import Link from 'next/link'
+import { Navbar } from "@/components/sections/Navbar";
+import { Footer } from "@/components/sections/Footer";
+import { Button } from "@/components/ui/Button";
+import { Check } from "lucide-react";
+
+const FEATURES = [
+  "On-device speech-to-text — your voice never leaves your Mac",
+  "Works fully offline (flights, secure environments)",
+  "Global hotkey — dictate into any app",
+  "Custom vocabulary and corrections",
+  "Text shortcodes that expand as you type",
+  "Voice actions — say “send it” to press Enter",
+  "Privacy boxes for screen redaction",
+  "Local transcription history",
+  "Use on two Macs with one subscription",
+];
 
 export default function Pricing() {
   return (
-    <main style={{ maxWidth: 780, margin: '0 auto', padding: '72px 24px' }}>
-      <h1 style={{ fontSize: 40, margin: 0 }}>Pricing</h1>
-      <div
-        style={{
-          marginTop: 32,
-          padding: 32,
-          border: '1px solid #334155',
-          borderRadius: 16,
-          background: '#0f172a',
-        }}
-      >
-        <h2 style={{ margin: 0, fontSize: 24 }}>Speakify</h2>
-        <p style={{ fontSize: 48, margin: '16px 0 4px', fontWeight: 700 }}>
-          $20<span style={{ fontSize: 20, color: '#94a3b8', fontWeight: 400 }}> / month</span>
-        </p>
-        <p style={{ color: '#94a3b8', margin: '0 0 24px' }}>7-day free trial. Cancel anytime.</p>
-        <ul style={{ paddingLeft: 20, lineHeight: 1.8, color: '#cbd5e1' }}>
-          <li>Local speech-to-text — never sends your voice to a server</li>
-          <li>Works offline (planes, no wifi, secure environments)</li>
-          <li>Global hotkey — dictate into any app</li>
-          <li>Vocabulary corrections + text shortcodes</li>
-          <li>Voice actions (&ldquo;send it&rdquo; → presses Enter)</li>
-          <li>Transcription history</li>
-          <li>Two devices per subscription</li>
-        </ul>
-        <Link
-          href="/login?next=/account"
-          style={{
-            display: 'inline-block',
-            marginTop: 24,
-            background: '#3b82f6',
-            color: 'white',
-            padding: '14px 24px',
-            borderRadius: 10,
-            textDecoration: 'none',
-            fontWeight: 600,
-          }}
-        >
-          Start free trial
-        </Link>
-        <p style={{ marginTop: 12, fontSize: 13, color: '#64748b' }}>
-          A credit card is required to start the trial. You won&apos;t be charged until day 8.
-        </p>
-      </div>
-    </main>
-  )
+    <>
+      <Navbar />
+      <main className="pt-32 pb-24 px-6">
+        <div className="max-w-6xl mx-auto text-center mb-16">
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-zinc-100 mb-4">
+            One plan. Everything included.
+          </h1>
+          <p className="text-lg text-zinc-400 max-w-xl mx-auto">
+            Try everything free for 7 days. Cancel anytime from your account page — no emails, no hoops.
+          </p>
+        </div>
+
+        <div className="relative max-w-md mx-auto">
+          <div className="absolute inset-0 bg-blue-500/10 blur-3xl rounded-full pointer-events-none" />
+          <div className="relative bg-zinc-900/80 border border-zinc-800/50 rounded-2xl p-8 backdrop-blur-sm">
+            <div className="flex items-baseline justify-center gap-2 mb-1">
+              <span className="text-5xl font-bold text-zinc-100">$20</span>
+              <span className="text-lg text-zinc-500">/month</span>
+            </div>
+            <p className="text-sm text-zinc-500 text-center mb-8">after a 7-day free trial</p>
+
+            <ul className="space-y-3 mb-8 text-left">
+              {FEATURES.map((f) => (
+                <li key={f} className="flex items-start gap-3">
+                  <Check className="w-4 h-4 text-green-400 mt-0.5 shrink-0" />
+                  <span className="text-sm text-zinc-300 leading-relaxed">{f}</span>
+                </li>
+              ))}
+            </ul>
+
+            <Button href="/download" variant="primary" size="lg" className="w-full">
+              Start Free Trial
+            </Button>
+            <p className="text-xs text-zinc-600 text-center mt-4">
+              Card required to start. You won&apos;t be charged until day 8.
+            </p>
+          </div>
+        </div>
+      </main>
+      <Footer />
+    </>
+  );
 }

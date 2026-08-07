@@ -35,11 +35,13 @@ export async function createCheckoutSession(
     }
   }
 
+  // TRIAL_DAYS=0 disables trials entirely: every checkout charges immediately.
+  const trialDays = Number(process.env.TRIAL_DAYS ?? '3')
   const hadSubscription = existing.rows.length > 0
-  const wantsTrial = plan === 'trial' && !hadSubscription
+  const wantsTrial = plan === 'trial' && !hadSubscription && trialDays > 0
   const subscriptionData: Record<string, unknown> = { metadata: { user_id: user.id } }
   if (wantsTrial) {
-    subscriptionData.trial_period_days = 3
+    subscriptionData.trial_period_days = trialDays
     subscriptionData.trial_settings = { end_behavior: { missing_payment_method: 'cancel' } }
   }
 

@@ -1,16 +1,21 @@
 import Stripe from 'stripe'
 
+// Restricted live keys (rk_live_) are accepted too — scoped keys are preferable
+// to the account-wide secret key.
+function isLiveKey(key: string | undefined): key is string {
+  return !!key && (key.startsWith('sk_live_') || key.startsWith('rk_live_'))
+}
+
 function secretKey(): string {
   const live = process.env.STRIPE_SECRET_KEY_LIVE
-  if (live?.startsWith('sk_live_')) return live
+  if (isLiveKey(live)) return live
   const test = process.env.STRIPE_SECRET_KEY_TEST
   if (!test) throw new Error('No Stripe secret key configured')
   return test
 }
 
 export function isTestMode(): boolean {
-  const live = process.env.STRIPE_SECRET_KEY_LIVE
-  return !live?.startsWith('sk_live_')
+  return !isLiveKey(process.env.STRIPE_SECRET_KEY_LIVE)
 }
 
 let _stripe: Stripe | null = null

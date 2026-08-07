@@ -31,8 +31,9 @@ export default function Terms() {
           <P>
             Speakify is a dictation app for macOS. Speech is transcribed on your device. An internet connection
             and an active subscription (or trial) are required to activate the app, and the app periodically
-            confirms your subscription status online. If it cannot confirm your status for an extended period,
-            some functionality pauses until you reconnect.
+            confirms your subscription status online. You can stay fully offline for up to 14 days between
+            checks. After 14 days the app reminds you to reconnect, and after 30 days without a successful
+            check, dictation pauses until the app can confirm your subscription again.
           </P>
 
           <H2>Subscription and billing</H2>
@@ -47,12 +48,12 @@ export default function Terms() {
           <H2>Refunds</H2>
           <P>
             If Speakify is not working for you, email support@speakify.dev within 14 days of your first charge
-            and we will refund it in full. Refunds after that window are at our discretion, but we try to be fair.
+            and we will refund it in full. Refunds after that window are at our discretion, but we try to be fair. Charges appear on your card statement as MUSCLED-SPEAKIFY.
           </P>
 
           <H2>Your license</H2>
           <P>
-            Your subscription grants you a personal, non-transferable license to use Speakify on up to two Macs
+            Your subscription grants you a personal, non-transferable license to use Speakify on Macs
             that you own or control. You may not resell, redistribute, sublicense, or share your account, and you
             may not reverse-engineer the app or circumvent its subscription checks.
           </P>
@@ -66,7 +67,9 @@ export default function Terms() {
           <H2>Your content</H2>
           <P>
             Everything you dictate belongs to you. Because transcription happens on your device, we never
-            receive, store, or claim any rights over your dictated content.
+            receive, store, or claim any rights over your dictated content. The one exception is text you
+            explicitly choose to send to a third-party AI provider via the optional AI Cleanup feature,
+            described in our Privacy Policy.
           </P>
 
           <H2>Disclaimers</H2>

@@ -27,7 +27,7 @@ export default function Login() {
 
           <h1 className="text-2xl font-bold text-zinc-100 mb-2">Sign in to Speakify</h1>
           <p className="text-sm text-zinc-400 mb-8 leading-relaxed">
-            One account for your subscription and every Mac you use Speakify on.
+            One account for your subscription across your personal Macs.
           </p>
 
           <button
@@ -45,7 +45,7 @@ export default function Login() {
           </button>
 
           <p className="text-xs text-zinc-600 mt-6">
-            New here? Signing in creates your account and starts your 7-day free trial.
+            New here? Signing in creates your account. You'll start your 7-day free trial on the next page.
           </p>
         </div>
       </div>

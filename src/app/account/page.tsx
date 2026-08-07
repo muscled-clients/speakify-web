@@ -56,7 +56,7 @@ export default async function Account({
             <div className="flex items-center gap-3 bg-green-500/10 border border-green-500/30 rounded-xl px-5 py-4 mb-8">
               <CheckCircle2 className="w-5 h-5 text-green-400 shrink-0" />
               <p className="text-sm text-zinc-200">
-                Your trial has started. Open the Speakify app on your Mac and sign in — it unlocks automatically.
+                Your trial has started. You're all set. Return to the Speakify app on your Mac and it unlocks within a few minutes.
               </p>
             </div>
           )}
@@ -77,7 +77,7 @@ export default async function Account({
             {!sub ? (
               <>
                 <p className="text-sm text-zinc-400 mb-6 leading-relaxed">
-                  You&apos;re not subscribed yet. Start your 7-day free trial — full access to everything,
+                  You&apos;re not subscribed yet. Start your 7-day free trial: full access to everything,
                   and you won&apos;t be charged until day 8.
                 </p>
                 <AccountActions kind="checkout" />
@@ -88,7 +88,7 @@ export default async function Account({
                   {sub.status === "trialing" && sub.trial_end && (
                     <p className="text-sm text-zinc-300">
                       Trial ends <span className="font-medium text-zinc-100">{fmt(sub.trial_end)}</span>
-                      {" — "}your card is charged $20/month after that.
+                      {". "}Your card is charged $20/month after that.
                     </p>
                   )}
                   {sub.status === "active" && sub.current_period_end && (
@@ -102,15 +102,18 @@ export default async function Account({
                     </p>
                   )}
                   {(sub.status === "canceled") && (
-                    <p className="text-sm text-zinc-400">Your subscription has ended. Restart anytime.</p>
+                    <p className="text-sm text-zinc-400">Your subscription has ended. Restart anytime. Your shortcodes, vocabulary, and history are still on your Mac.</p>
                   )}
                   {sub.cancel_at_period_end && sub.status !== "canceled" && (
                     <p className="text-xs text-zinc-500">
-                      Cancellation scheduled — access continues until the end of the period.
+                      Cancellation scheduled. Access continues until the end of the period.
                     </p>
                   )}
                 </div>
-                <AccountActions kind={sub.status === "canceled" ? "checkout" : "portal"} />
+                <AccountActions
+                  kind={sub.status === "canceled" ? "checkout" : "portal"}
+                  label={sub.status === "canceled" ? "Resubscribe for $20/month" : undefined}
+                />
               </>
             )}
           </div>
@@ -119,7 +122,7 @@ export default async function Account({
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="text-lg font-semibold text-zinc-100 mb-1">Get the app</h2>
-                <p className="text-sm text-zinc-400">macOS 14+ on Apple Silicon.</p>
+                <p className="text-sm text-zinc-400">macOS 14+ on Apple Silicon. Already subscribed on another Mac? Just download and sign in with the same Google account.</p>
               </div>
               <a
                 href="/downloads/Speakify.dmg"

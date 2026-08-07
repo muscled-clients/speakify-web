@@ -30,7 +30,7 @@ export default function Privacy() {
 
           <H2>What stays on your Mac</H2>
           <ul className="list-disc pl-5 mb-4">
-            <LI>Your voice recordings. Audio is transcribed on your device and the temporary recording file is deleted after transcription. Audio is never uploaded anywhere.</LI>
+            <LI>Your voice recordings. Audio is transcribed on your device and the temporary recording file is deleted after transcription. Audio is never uploaded anywhere. One exception applies to text, not audio: if you enable the optional AI Cleanup feature, the text of your dictation is sent to Anthropic, as described below.</LI>
             <LI>Your transcriptions. Transcription history is stored in a local database on your Mac. It is never sent to our servers.</LI>
             <LI>Your shortcodes, vocabulary, corrections, and settings. All stored locally.</LI>
             <LI>Your usage statistics (words dictated, time saved). Computed and stored locally.</LI>
@@ -67,7 +67,9 @@ export default function Privacy() {
             AI Cleanup is off by default. If you enable it and provide your own Anthropic API key, the text of
             each dictation (not the audio) is sent to Anthropic&apos;s API for grammar cleanup, under your own
             Anthropic account and their privacy terms. If you never enable it, no dictation content ever leaves
-            your Mac. Your API key is stored in the macOS Keychain.
+            your Mac. Your API key is stored in the macOS Keychain. AI Cleanup calls go directly from your
+            Mac to Anthropic using your key, so usage is billed to your own Anthropic account and is your
+            responsibility.
           </P>
 
           <H2>What we do not do</H2>

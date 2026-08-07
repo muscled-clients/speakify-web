@@ -46,17 +46,20 @@ export async function POST(req: NextRequest) {
 
   const appUrl = process.env.NEXT_PUBLIC_APP_URL || new URL(req.url).origin
 
+  // One trial per user: a returning subscriber (any prior subscription row)
+  // resubscribes at full price instead of minting another free week.
+  const hadSubscription = existing.rows.length > 0
+  const subscriptionData: Record<string, unknown> = { metadata: { user_id: user.id } }
+  if (!hadSubscription) {
+    subscriptionData.trial_period_days = 7
+    subscriptionData.trial_settings = { end_behavior: { missing_payment_method: 'cancel' } }
+  }
+
   const checkout = await stripe.checkout.sessions.create({
     mode: 'subscription',
     customer: customerId,
     line_items: [{ price, quantity: 1 }],
-    subscription_data: {
-      trial_period_days: 7,
-      trial_settings: {
-        end_behavior: { missing_payment_method: 'cancel' },
-      },
-      metadata: { user_id: user.id },
-    },
+    subscription_data: subscriptionData as never,
     payment_method_collection: 'always',
     metadata: { user_id: user.id },
     success_url: `${appUrl}/account?checkout=success`,

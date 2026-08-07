@@ -21,7 +21,7 @@ const STEPS = [
     icon: ClipboardPaste,
     title: "Text Appears",
     description:
-      "Clean, corrected text is auto-pasted exactly where your cursor was. That's it — done.",
+      "Clean, corrected text is auto-pasted exactly where your cursor was. That's it.",
   },
 ];
 

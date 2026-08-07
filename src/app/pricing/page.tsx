@@ -4,16 +4,15 @@ import { Button } from "@/components/ui/Button";
 import { Check } from "lucide-react";
 
 const FEATURES = [
-  "On-device speech-to-text — your voice never leaves your Mac",
+  "On-device speech-to-text that never sends your voice off your Mac",
   "Works fully offline (flights, secure environments)",
-  "Global hotkey — dictate into any app",
+  "Global hotkey to dictate into any app",
   "Custom vocabulary and corrections",
   "Text shortcodes that expand as you type",
-  "Voice actions — say “send it” to press Enter",
+  "Voice actions, like saying “send it” to press Enter",
   "Privacy boxes for screen redaction",
   "Local transcription history",
-  "Use on two Macs with one subscription",
-];
+  ];
 
 export default function Pricing() {
   return (
@@ -25,7 +24,7 @@ export default function Pricing() {
             One plan. Everything included.
           </h1>
           <p className="text-lg text-zinc-400 max-w-xl mx-auto">
-            Try everything free for 7 days. Cancel anytime from your account page — no emails, no hoops.
+            Try everything free for 7 days. Cancel anytime from your account page, no emails and no hoops.
           </p>
         </div>
 
@@ -51,7 +50,7 @@ export default function Pricing() {
               Start Free Trial
             </Button>
             <p className="text-xs text-zinc-600 text-center mt-4">
-              Card required to start. You won&apos;t be charged until day 8.
+              Card required to start. You won&apos;t be charged until day 8, and there is a 14-day money-back guarantee after your first charge. Licensed for your personal Macs.
             </p>
           </div>
         </div>

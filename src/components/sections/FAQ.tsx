@@ -8,22 +8,27 @@ const FAQS = [
   {
     question: "How does the free trial work?",
     answer:
-      "You get full access to everything for 7 days. A card is required to start, but you won't be charged until day 8 — cancel anytime before then and you pay nothing. Cancellation is self-serve from your account page.",
+      "You get full access to everything for 7 days. A card is required to start, but you won't be charged until day 8. Cancel anytime before then and you pay nothing. Cancellation is self-serve from your account page.",
+  },
+  {
+    question: "What if it doesn't work for me?",
+    answer:
+      "Email support@speakify.dev within 14 days of your first charge and we refund it in full, no questions asked. Before that, canceling during the trial costs nothing. Charges appear on your card statement as MUSCLED-SPEAKIFY.",
   },
   {
     question: "Why does Speakify cost more than some cloud tools?",
     answer:
-      "Because your voice never leaves your Mac. Cloud dictation tools subsidize their price by processing your audio on their servers. Speakify runs the speech model on your own hardware — you're paying for software that works offline, in secure environments, and keeps every word you say on your device.",
+      "Because your voice never leaves your Mac. Cloud dictation tools subsidize their price by processing your audio on their servers. For comparison, Wispr Flow charges $12 to $15 per month and processes your audio on their servers. Speakify runs the speech model on your own hardware for a flat $20: no per-word limits, works offline, works in secure environments, and keeps every word you say on your device.",
   },
   {
     question: "Does my voice or text ever leave my Mac?",
     answer:
-      "Your audio is transcribed entirely on-device and your transcription history is stored locally — neither ever touches our servers. The app makes exactly two kinds of network requests: a periodic subscription check (which sends no dictation data), and one-time speech model downloads. The optional AI Cleanup feature, off by default, sends text to Anthropic's API only if you enable it with your own key.",
+      "Your audio is transcribed entirely on-device and your transcription history is stored locally. Neither ever touches our servers. The app makes exactly two kinds of network requests: a periodic subscription check (which sends no dictation data), and one-time speech model downloads. The optional AI Cleanup feature, off by default, sends text to Anthropic's API only if you enable it with your own key.",
   },
   {
     question: "How does it work offline?",
     answer:
-      "Speakify uses whisper.cpp, a native port of OpenAI's Whisper model, running directly on your Mac with Metal GPU acceleration. The base model ships inside the app, so dictation works the moment you install — on a plane, in a SCIF, anywhere. The app just needs to see the internet once every couple of weeks to confirm your subscription.",
+      "Speakify uses whisper.cpp, a native port of OpenAI's Whisper model, running directly on your Mac with Metal GPU acceleration. The base model ships inside the app, so dictation works the moment you install: on a plane, in a SCIF, anywhere. The app checks your subscription in the background when it can. You can stay fully offline for up to 14 days with no interruption; after that it reminds you to reconnect, and after 30 days offline dictation pauses until it can check in.",
   },
   {
     question: "How accurate is the transcription?",
@@ -33,12 +38,12 @@ const FAQS = [
   {
     question: "What happens if I cancel?",
     answer:
-      "You keep access until the end of your billing period. After that, dictation pauses until you resubscribe. Your settings, shortcodes, vocabulary, and transcription history stay on your Mac — nothing is deleted, because none of it was ever on our servers.",
+      "You keep access until the end of your billing period. After that, dictation pauses until you resubscribe. Your settings, shortcodes, vocabulary, and transcription history stay on your Mac. Nothing is deleted, because none of it was ever on our servers.",
   },
   {
     question: "What Macs are supported?",
     answer:
-      "Speakify requires macOS 14 (Sonoma) or later on Apple Silicon (M1 or newer). Intel Macs are not supported — the speech engine relies on Apple Silicon's performance to deliver near-instant transcription.",
+      "Speakify requires macOS 14 (Sonoma) or later on Apple Silicon (M1 or newer). Intel Macs are not supported. The speech engine relies on Apple Silicon's performance to deliver near-instant transcription.",
   },
   {
     question: "How is this different from Wispr Flow or SuperWhisper?",

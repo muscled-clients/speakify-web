@@ -9,7 +9,7 @@ export function Platforms() {
           Built for your Mac.
         </h2>
         <p className="text-zinc-400 max-w-xl mx-auto">
-          Speakify runs natively on macOS. iOS keyboard is on the roadmap — same offline engine, same privacy.
+          Speakify runs natively on macOS. iOS keyboard is on the roadmap, with the same offline engine and the same privacy.
         </p>
       </div>
 

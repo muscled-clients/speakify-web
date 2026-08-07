@@ -31,7 +31,7 @@ export default function Download() {
             Download Speakify
           </h1>
           <p className="text-lg text-zinc-400 max-w-xl mx-auto mb-10">
-            macOS 14 or later on Apple Silicon. About 140MB — the speech model is built in.
+            macOS 14 or later on Apple Silicon. About 140MB, with the speech model built in.
           </p>
 
           <div className="flex flex-col items-center gap-4 mb-20">

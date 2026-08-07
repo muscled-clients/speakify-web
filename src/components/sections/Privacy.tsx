@@ -5,7 +5,7 @@ const PRIVACY_POINTS = [
   { icon: Server, text: "No servers or cloud infrastructure" },
   { icon: Eye, text: "No telemetry or analytics whatsoever" },
   { icon: Lock, text: "Audio processed in memory, never saved" },
-  { icon: Shield, text: "Open source — verify it yourself" },
+  { icon: Shield, text: "Verify it yourself with any network monitor" },
 ];
 
 export function Privacy() {
@@ -22,7 +22,7 @@ export function Privacy() {
               Your voice never leaves your device
             </h2>
             <p className="text-zinc-400 leading-relaxed mb-8">
-              Speakify uses whisper.cpp to process audio directly on your Mac&apos;s GPU. There are no servers, no APIs, no cloud endpoints. Your audio is transcribed in memory and immediately discarded. We don&apos;t collect telemetry, analytics, or usage data. We can&apos;t — there&apos;s no server to send it to.
+              Speakify uses whisper.cpp to process audio directly on your Mac&apos;s GPU. Your audio is transcribed on-device and the recording is immediately discarded. The only thing the app checks online is your subscription status, which contains no dictation data. We don&apos;t collect telemetry, analytics, or usage data. Run any network monitor and watch for yourself.
             </p>
             <div className="space-y-4">
               {PRIVACY_POINTS.map((item) => (

@@ -13,7 +13,7 @@ export function Hero() {
         {/* Badge */}
         <div className="inline-flex items-center gap-2 bg-zinc-900 border border-zinc-800/50 rounded-full px-4 py-1.5 mb-8">
           <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-          <span className="text-sm text-zinc-400">Private by design — your voice never leaves your Mac</span>
+          <span className="text-sm text-zinc-400">Private by design. Your voice never leaves your Mac</span>
         </div>
 
         {/* Headline */}
@@ -26,7 +26,7 @@ export function Hero() {
 
         {/* Subheadline */}
         <p className="text-lg md:text-xl text-zinc-400 max-w-2xl mx-auto mb-10 leading-relaxed">
-          Speakify turns your speech into text — entirely on your Mac. No cloud transcription, works offline, even on a plane. Just press{" "}
+          Speakify turns your speech into text, entirely on your Mac. No cloud transcription, works offline, even on a plane. Just press{" "}
           <kbd className="px-2 py-0.5 bg-zinc-800 border border-zinc-700 rounded text-sm text-zinc-300 font-mono">⌃Space</kbd>{" "}
           and start talking.
         </p>
@@ -44,7 +44,7 @@ export function Hero() {
         </div>
         <p className="text-sm text-zinc-500 mb-16">7 days free, then $20/month. Cancel anytime.</p>
 
-        {/* App mockup — recording window */}
+        {/* App mockup: recording window */}
         <div className="relative max-w-2xl mx-auto">
           <div className="bg-zinc-900/80 border border-zinc-800/50 rounded-2xl p-6 md:p-8 backdrop-blur-sm">
             {/* Waveform */}

@@ -2,7 +2,13 @@
 
 import { useState } from "react";
 
-export default function AccountActions({ kind }: { kind: "checkout" | "portal" }) {
+export default function AccountActions({
+  kind,
+  label,
+}: {
+  kind: "checkout" | "portal";
+  label?: string;
+}) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -34,9 +40,7 @@ export default function AccountActions({ kind }: { kind: "checkout" | "portal" }
       >
         {loading
           ? "One moment…"
-          : kind === "checkout"
-          ? "Start 7-Day Free Trial"
-          : "Manage Subscription"}
+          : label ?? (kind === "checkout" ? "Start 7-Day Free Trial" : "Manage Subscription")}
       </button>
       {error && <p className="text-xs text-red-400 mt-3">{error}</p>}
     </div>

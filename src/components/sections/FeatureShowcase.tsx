@@ -19,7 +19,7 @@ const TABS = [
     label: "Vocabulary",
     headline: "Teach it your words",
     description:
-      "Add names, jargon, and custom terms so Whisper recognizes them accurately. Set up auto-corrections for common mistranscriptions — per app.",
+      "Add names, jargon, and custom terms so Whisper recognizes them accurately. Set up auto-corrections for common mistranscriptions, per app.",
   },
   {
     id: "privacy",
@@ -41,7 +41,7 @@ export function FeatureShowcase() {
           See it in action
         </h2>
         <p className="text-zinc-400 max-w-xl mx-auto">
-          Speakify is more than dictation. Shortcodes, vocabulary training, and privacy tools — all built in.
+          Speakify is more than dictation. Shortcodes, vocabulary training, and privacy tools, all built in.
         </p>
       </div>
 

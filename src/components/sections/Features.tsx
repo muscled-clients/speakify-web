@@ -12,7 +12,7 @@ const FEATURES = [
     icon: ClipboardPaste,
     title: "Auto-Paste",
     description:
-      "Transcribed text automatically appears wherever your cursor is — emails, docs, Slack, anywhere.",
+      "Transcribed text automatically appears wherever your cursor is: emails, docs, Slack, anywhere.",
   },
   {
     icon: BookType,

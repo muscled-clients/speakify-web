@@ -9,7 +9,7 @@ export function PrivacyBoxMockup() {
             <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
             <div className="w-3 h-3 rounded-full bg-green-500/80" />
           </div>
-          <span className="text-xs text-zinc-500">Privacy Boxes — Desktop</span>
+          <span className="text-xs text-zinc-500">Privacy Boxes: Desktop</span>
         </div>
       </div>
 

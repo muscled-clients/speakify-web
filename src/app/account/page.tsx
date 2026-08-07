@@ -82,7 +82,14 @@ export default async function Account({
                   You&apos;re not subscribed yet. Start your 7-day free trial: full access to everything,
                   and you won&apos;t be charged until day 8.
                 </p>
-                <AccountActions kind="checkout" />
+                <div className="flex flex-col gap-3">
+                  <AccountActions kind="checkout" plan="trial" />
+                  <AccountActions
+                    kind="checkout"
+                    plan="now"
+                    label="Skip the trial, subscribe now for $20/month"
+                  />
+                </div>
               </>
             ) : (
               <>

@@ -5,9 +5,11 @@ import { useState } from "react";
 export default function AccountActions({
   kind,
   label,
+  plan = "trial",
 }: {
   kind: "checkout" | "portal";
   label?: string;
+  plan?: "trial" | "now";
 }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -17,7 +19,11 @@ export default function AccountActions({
     setError(null);
     const path = kind === "checkout" ? "/api/stripe/create-checkout" : "/api/stripe/portal";
     try {
-      const res = await fetch(path, { method: "POST" });
+      const res = await fetch(path, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(kind === "checkout" ? { plan } : {}),
+      });
       const data = await res.json();
       if (data.url) {
         window.location.href = data.url;

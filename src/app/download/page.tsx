@@ -1,18 +1,23 @@
+import { headers } from "next/headers";
+import { auth } from "@/lib/auth/auth";
+import { query } from "@/lib/db/pool";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { Button } from "@/components/ui/Button";
-import { Download as DownloadIcon, KeyRound, Mic } from "lucide-react";
+import { Download as DownloadIcon, Mic, CreditCard } from "lucide-react";
+
+export const dynamic = "force-dynamic";
 
 const STEPS = [
   {
-    icon: DownloadIcon,
-    title: "Download & install",
-    text: "Grab the DMG and drag Speakify into Applications.",
+    icon: CreditCard,
+    title: "Start your trial",
+    text: "Sign in with Google and add a card. 7 days free, cancel anytime before day 8.",
   },
   {
-    icon: KeyRound,
-    title: "Sign in with Google",
-    text: "Launch Speakify and sign in. Then add a card to start your 7-day free trial.",
+    icon: DownloadIcon,
+    title: "Download & install",
+    text: "Grab the DMG from your account page and drag Speakify into Applications.",
   },
   {
     icon: Mic,
@@ -21,28 +26,61 @@ const STEPS = [
   },
 ];
 
-export default function Download() {
+export default async function Download() {
+  const hdrs = await headers();
+  const session = await auth.api.getSession({ headers: hdrs });
+
+  let hasSubscription = false;
+  if (session?.user) {
+    const { rows } = await query<{ status: string }>(
+      `SELECT status FROM subscriptions WHERE user_id = $1`,
+      [session.user.id]
+    );
+    hasSubscription = rows.length > 0;
+  }
+
   return (
     <>
       <Navbar />
       <main className="pt-32 pb-24 px-6">
         <div className="max-w-6xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-zinc-100 mb-4">
-            Download Speakify
+            {hasSubscription ? "Download Speakify" : "Get Speakify"}
           </h1>
           <p className="text-lg text-zinc-400 max-w-xl mx-auto mb-10">
             macOS 14 or later on Apple Silicon. About 140MB, with the speech model built in.
           </p>
 
-          <div className="flex flex-col items-center gap-4 mb-20">
-            <Button href="/downloads/Speakify.dmg" variant="primary" size="lg">
-              <DownloadIcon className="w-5 h-5" />
-              Download for Mac
-            </Button>
-            <p className="text-xs text-zinc-600">
-              Free for 7 days, then $20/month. Notarized by Apple.
-            </p>
-          </div>
+          {hasSubscription ? (
+            <div className="flex flex-col items-center gap-4 mb-20">
+              <Button href="/downloads/Speakify.dmg" variant="primary" size="lg">
+                <DownloadIcon className="w-5 h-5" />
+                Download for Mac
+              </Button>
+              <p className="text-xs text-zinc-600">
+                Launch it and sign in with the same Google account. It unlocks automatically.
+              </p>
+            </div>
+          ) : (
+            <div className="flex flex-col items-center gap-4 mb-20">
+              <div className="flex flex-col sm:flex-row items-center gap-4">
+                <Button href="/start?plan=trial" variant="primary" size="lg">
+                  Start 7-Day Free Trial
+                </Button>
+                <Button href="/start?plan=now" variant="secondary" size="lg">
+                  Skip the trial, subscribe now
+                </Button>
+              </div>
+              <p className="text-xs text-zinc-600">
+                $20/month either way. The download unlocks right after checkout.
+              </p>
+              {!session?.user && (
+                <p className="text-xs text-zinc-600">
+                  Already subscribed? <a href="/login?next=/download" className="text-blue-400 hover:underline">Sign in</a> to download.
+                </p>
+              )}
+            </div>
+          )}
 
           <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
             {STEPS.map((step, i) => (

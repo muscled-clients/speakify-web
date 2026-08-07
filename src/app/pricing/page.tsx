@@ -46,9 +46,14 @@ export default function Pricing() {
               ))}
             </ul>
 
-            <Button href="/download" variant="primary" size="lg" className="w-full">
-              Start Free Trial
+            <Button href="/start?plan=trial" variant="primary" size="lg" className="w-full">
+              Start 7-Day Free Trial
             </Button>
+            <p className="text-center mt-3">
+              <a href="/start?plan=now" className="text-sm text-blue-400 hover:underline">
+                Convinced already? Skip the trial and subscribe now
+              </a>
+            </p>
             <p className="text-xs text-zinc-600 text-center mt-4">
               Card required to start. You won&apos;t be charged until day 8, and there is a 14-day money-back guarantee after your first charge. Licensed for your personal Macs.
             </p>

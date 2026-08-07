@@ -44,7 +44,7 @@ export function Navbar() {
           <a href="/login" className="text-sm text-zinc-400 hover:text-zinc-100 transition-colors duration-200">
             Sign In
           </a>
-          <a href="/download" className="inline-flex items-center gap-2 bg-blue-500 text-white text-sm font-medium px-4 py-2 rounded-lg hover:bg-blue-400 transition-colors duration-200">
+          <a href="/start?plan=trial" className="inline-flex items-center gap-2 bg-blue-500 text-white text-sm font-medium px-4 py-2 rounded-lg hover:bg-blue-400 transition-colors duration-200">
             Start Free Trial
           </a>
         </div>
@@ -64,7 +64,7 @@ export function Navbar() {
             </a>
           ))}
           <div className="px-6 py-3">
-            <a href="/download" className="inline-flex items-center gap-2 bg-blue-500 text-white text-sm font-medium px-4 py-2 rounded-lg hover:bg-blue-400 transition-colors duration-200">
+            <a href="/start?plan=trial" className="inline-flex items-center gap-2 bg-blue-500 text-white text-sm font-medium px-4 py-2 rounded-lg hover:bg-blue-400 transition-colors duration-200">
               Start Free Trial
             </a>
           </div>

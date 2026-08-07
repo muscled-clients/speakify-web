@@ -9,9 +9,13 @@ export default function Login() {
 
   async function signInGoogle() {
     setLoading(true);
+    // Honor ?next= so CTAs can route through login into checkout; only
+    // same-site paths are accepted.
+    const next = new URLSearchParams(window.location.search).get("next");
+    const callbackURL = next && next.startsWith("/") && !next.startsWith("//") ? next : "/account";
     await authClient.signIn.social({
       provider: "google",
-      callbackURL: "/account",
+      callbackURL,
     });
   }
 

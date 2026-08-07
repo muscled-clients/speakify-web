@@ -15,7 +15,7 @@ export function FinalCTA() {
           Try Speakify free for 7 days and experience voice-to-text that actually respects your privacy.
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Button href="/download" variant="primary" size="lg">
+          <Button href="/start?plan=trial" variant="primary" size="lg">
             <Download className="w-5 h-5" />
             Start Free Trial
           </Button>

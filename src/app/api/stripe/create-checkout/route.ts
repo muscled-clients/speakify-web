@@ -1,74 +1,35 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { auth } from '@/lib/auth/auth'
-import { getStripe, priceIdMonthly } from '@/lib/stripe'
-import { query } from '@/lib/db/pool'
+import { createCheckoutSession, type CheckoutPlan } from '@/lib/checkout'
 
 export const dynamic = 'force-dynamic'
 export const runtime = 'nodejs'
 
-/**
- * POST /api/stripe/create-checkout
- *
- * Creates a Stripe Checkout Session for the logged-in user.
- * - $20/mo subscription
- * - 7-day trial, credit card required upfront
- * - Reuses Stripe customer if user has one, else creates one
- * - Success/cancel URLs bounce back into the account page
- */
+/** POST /api/stripe/create-checkout — body: { plan?: 'trial' | 'now' } (default trial). */
 export async function POST(req: NextRequest) {
   const session = await auth.api.getSession({ headers: req.headers })
   if (!session?.user) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
-  const user = session.user
 
-  const stripe = getStripe()
-  const price = priceIdMonthly()
-
-  // Find or create Stripe customer
-  const existing = await query<{ stripe_customer_id: string }>(
-    `SELECT stripe_customer_id FROM subscriptions WHERE user_id = $1`,
-    [user.id]
-  )
-  let customerId = existing.rows[0]?.stripe_customer_id ?? null
-  if (!customerId) {
-    const customers = await stripe.customers.list({ email: user.email, limit: 1 })
-    customerId = customers.data[0]?.id ?? null
-    if (!customerId) {
-      const c = await stripe.customers.create({
-        email: user.email,
-        name: user.name ?? undefined,
-        metadata: { user_id: user.id },
-      })
-      customerId = c.id
-    }
+  let plan: CheckoutPlan = 'trial'
+  try {
+    const body = (await req.json()) as { plan?: string }
+    if (body.plan === 'now') plan = 'now'
+  } catch {
+    // no body — default to trial
   }
 
   const appUrl = process.env.NEXT_PUBLIC_APP_URL || new URL(req.url).origin
-
-  // One trial per user: a returning subscriber (any prior subscription row)
-  // resubscribes at full price instead of minting another free week.
-  const hadSubscription = existing.rows.length > 0
-  const subscriptionData: Record<string, unknown> = { metadata: { user_id: user.id } }
-  if (!hadSubscription) {
-    subscriptionData.trial_period_days = 7
-    subscriptionData.trial_settings = { end_behavior: { missing_payment_method: 'cancel' } }
-  }
-
-  const checkout = await stripe.checkout.sessions.create({
-    mode: 'subscription',
-    customer: customerId,
-    line_items: [{ price, quantity: 1 }],
-    subscription_data: subscriptionData as never,
-    payment_method_collection: 'always',
-    metadata: { user_id: user.id },
-    success_url: `${appUrl}/account?checkout=success`,
-    cancel_url: `${appUrl}/account?checkout=cancel`,
-    allow_promotion_codes: true,
-  })
-
-  if (!checkout.url) {
+  try {
+    const url = await createCheckoutSession(
+      { id: session.user.id, email: session.user.email, name: session.user.name },
+      plan,
+      appUrl
+    )
+    return NextResponse.json({ url })
+  } catch (err) {
+    console.error('[create-checkout] failed:', err)
     return NextResponse.json({ error: 'Failed to create checkout session' }, { status: 500 })
   }
-  return NextResponse.json({ url: checkout.url })
 }

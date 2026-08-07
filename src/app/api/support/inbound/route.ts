@@ -18,9 +18,6 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 })
   }
 
-  // Temporary diagnostic: Resend's email.received payload shape is being confirmed.
-  console.log('[support/inbound] raw payload:', JSON.stringify(payload).slice(0, 2000))
-
   // Resend inbound wraps the email in `data`; tolerate both shapes.
   const data = (payload.data ?? payload) as Record<string, unknown>
   const fromRaw = data.from
@@ -29,7 +26,27 @@ export async function POST(req: NextRequest) {
       ? fromRaw.match(/<([^>]+)>/)?.[1] ?? fromRaw
       : ((fromRaw as Record<string, unknown>)?.email as string) ?? 'unknown'
   const subject = (data.subject as string) ?? '(no subject)'
-  const body = (data.text as string) ?? (data.html as string) ?? '(empty body)'
+
+  // The email.received webhook carries only metadata; the body lives behind
+  // GET /emails/receiving/{email_id}.
+  let body = (data.text as string) ?? ''
+  const emailId = data.email_id as string | undefined
+  if (!body && emailId && process.env.RESEND_API_KEY) {
+    try {
+      const res = await fetch(`https://api.resend.com/emails/receiving/${emailId}`, {
+        headers: { Authorization: `Bearer ${process.env.RESEND_API_KEY}` },
+      })
+      if (res.ok) {
+        const full = (await res.json()) as { text?: string; html?: string }
+        body = full.text ?? full.html ?? ''
+      } else {
+        console.error('[support/inbound] body fetch failed:', res.status)
+      }
+    } catch (err) {
+      console.error('[support/inbound] body fetch error:', err)
+    }
+  }
+  if (!body) body = '(no body could be retrieved)'
 
   // Loop guard: never ingest our own outbound mail. Without this, an approved
   // reply addressed to support@ re-enters the pipeline and ping-pongs forever.

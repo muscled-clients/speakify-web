@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from 'next/server'
 import Stripe from 'stripe'
 import { getStripe } from '@/lib/stripe'
 import { query } from '@/lib/db/pool'
-import { sendTrialEndingEmail } from '@/lib/email'
 
 export const runtime = 'nodejs'
 
@@ -37,7 +36,8 @@ export async function POST(req: NextRequest) {
         await onSubscriptionDeleted(event.data.object as Stripe.Subscription)
         break
       case 'customer.subscription.trial_will_end':
-        await onTrialWillEnd(event.data.object as Stripe.Subscription)
+        // Fires 3 days before trial end, i.e. at signup for a 3-day trial.
+        // The 1-day reminder is sent by /api/cron/trial-reminder instead.
         break
       case 'invoice.payment_failed':
         // Handled by subscription.updated → status becomes past_due.
@@ -100,17 +100,6 @@ async function upsertSubscription(sub: Stripe.Subscription) {
     [userId, sub.customer as string, sub.id, sub.status, start, end, sub.cancel_at_period_end, trialEnd]
   )
   console.log(`[stripe/webhook] subscription upserted user=${userId} status=${sub.status}`)
-}
-
-async function onTrialWillEnd(sub: Stripe.Subscription) {
-  const userId = sub.metadata?.user_id
-  if (!userId) return
-  const { rows } = await query<{ email: string }>(`SELECT email FROM "user" WHERE id = $1`, [userId])
-  const email = rows[0]?.email
-  if (!email) return
-  const raw = sub as unknown as Record<string, unknown>
-  const trialEndTs = raw['trial_end'] as number | null | undefined
-  await sendTrialEndingEmail(email, trialEndTs ? new Date(trialEndTs * 1000) : null)
 }
 
 async function onSubscriptionDeleted(sub: Stripe.Subscription) {

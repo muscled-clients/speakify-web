@@ -10,22 +10,22 @@ function resend(): Resend | null {
 
 const FROM = process.env.EMAIL_FROM || 'Speakify <support@speakify.dev>'
 
-export async function sendTrialEndingEmail(to: string, trialEnd: Date | null) {
+export async function sendTrialEndingEmail(to: string, trialEnd: Date | null): Promise<boolean> {
   const client = resend()
   if (!client) {
     console.warn('[email] RESEND_API_KEY not set, skipping trial-ending email')
-    return
+    return false
   }
   const when = trialEnd
     ? trialEnd.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })
-    : 'in 3 days'
+    : 'tomorrow'
   try {
     await client.emails.send({
       from: FROM,
       to,
-      subject: 'Your Speakify trial ends soon',
+      subject: 'Your Speakify trial ends tomorrow',
       text: [
-        `Your Speakify free trial ends ${trialEnd ? `on ${when}` : when}.`,
+        `Your Speakify free trial ends tomorrow${trialEnd ? ` (${when})` : ''}.`,
         '',
         'If you love it, do nothing: your subscription starts automatically at $20/month.',
         '',
@@ -38,7 +38,9 @@ export async function sendTrialEndingEmail(to: string, trialEnd: Date | null) {
       ].join('\n'),
     })
     console.log(`[email] trial-ending sent to ${to}`)
+    return true
   } catch (err) {
     console.error('[email] trial-ending send failed:', err)
+    return false
   }
 }

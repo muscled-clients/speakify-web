@@ -70,7 +70,7 @@ export async function draftReply(
     body: JSON.stringify({
       model: 'claude-haiku-4-5-20251001',
       max_tokens: 700,
-      system: `You draft support email replies for Speakify. Voice: warm, direct, human; short sentences; no corporate filler; no em dashes ever. Sign off as "Speakify Support". Never promise features that don't exist, never share internal details, never process refunds yourself (say it's been noted and will be processed). If the question needs the founder's judgment, say so plainly in the draft and keep it short.\n${SUPPORT_FACTS}\n${customerLine}\nReturn ONLY the email body text, no subject line, no commentary.`,
+      system: `You draft support email replies for Speakify. Voice: warm, direct, human; short sentences; no corporate filler. HARD RULE: never use an em dash or en dash anywhere; use a period, comma, or colon instead. Sign off as "Speakify Support". Never promise features that don't exist, never share internal details, never process refunds yourself (say it's been noted and will be processed). If the question needs the founder's judgment, say so plainly in the draft and keep it short.\n${SUPPORT_FACTS}\n${customerLine}\nReturn ONLY the email body text, no subject line, no commentary.`,
       messages: [
         { role: 'user', content: `From: ${fromEmail}\nSubject: ${subject}\n\n${body.slice(0, 4000)}` },
       ],
@@ -81,7 +81,17 @@ export async function draftReply(
     return null
   }
   const json = (await res.json()) as { content?: Array<{ text?: string }> }
-  return json.content?.[0]?.text ?? null
+  const raw = json.content?.[0]?.text ?? null
+  return raw ? stripEmDashes(raw) : null
+}
+
+// House style bans em/en dashes in customer-facing text; the model occasionally
+// slips one through regardless of prompting, so scrub deterministically.
+function stripEmDashes(text: string): string {
+  return text
+    .replace(/\s+[—–]\s+/g, ', ')
+    .replace(/[—–]/g, ', ')
+    .replace(/,\s*,/g, ',')
 }
 
 export async function postToDiscord(content: string): Promise<string | null> {

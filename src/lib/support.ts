@@ -35,7 +35,7 @@ export async function lookupCustomer(email: string): Promise<CustomerContext> {
 
 const SUPPORT_FACTS = `
 Product facts you may rely on (do not invent others):
-- Speakify is a macOS dictation app, $20 USD/month after a 7-day free trial (card required to start the trial; no charge if canceled before day 8).
+- Speakify is a macOS dictation app, $20 USD/month after a 3-day free trial (card required to start the trial; no charge if canceled before day 4).
 - Refunds: full refund within 14 days of the first charge, no questions asked. Email confirmation is enough; the founder processes it.
 - Requirements: macOS 14 (Sonoma) or later, Apple Silicon only (M1 or newer). Intel Macs are not supported.
 - Default hotkey Ctrl+Space, changeable in Settings. Dictation is on-device (whisper.cpp); voice audio never leaves the Mac.

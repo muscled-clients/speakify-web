@@ -4,7 +4,7 @@ const TRUST_ITEMS = [
   { icon: WifiOff, label: "Offline Dictation", description: "Transcribes without internet." },
   { icon: Zap, label: "Metal Accelerated", description: "Blazing fast on Apple Silicon." },
   { icon: ShieldCheck, label: "Voice Stays Local", description: "Audio never touches a server." },
-  { icon: CalendarCheck, label: "7-Day Free Trial", description: "Try everything before you pay." },
+  { icon: CalendarCheck, label: "3-Day Free Trial", description: "Try everything before you pay." },
 ];
 
 export function TrustBar() {

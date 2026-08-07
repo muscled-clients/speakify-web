@@ -49,7 +49,10 @@ export default function Login() {
           </button>
 
           <p className="text-xs text-zinc-600 mt-6">
-            New here? Signing in creates your account. Add a card on the next page to start your 7-day free trial.
+            New here? Signing in creates your account. Add a card on the next page to start your 3-day free trial.
+          </p>
+          <p className="text-xs text-zinc-600 mt-2">
+            Prefer to skip the trial? <a href="/login?next=%2Fstart%3Fplan%3Dnow" className="text-blue-400 hover:underline">Subscribe now</a> and get charged today instead.
           </p>
         </div>
       </div>

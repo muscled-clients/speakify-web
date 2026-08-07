@@ -12,7 +12,7 @@ const STEPS = [
   {
     icon: CreditCard,
     title: "Start your trial",
-    text: "Sign in with Google and add a card. 7 days free, cancel anytime before day 8.",
+    text: "Sign in with Google and add a card. 3 days free, cancel anytime before day 4.",
   },
   {
     icon: DownloadIcon,
@@ -65,7 +65,7 @@ export default async function Download() {
             <div className="flex flex-col items-center gap-4 mb-20">
               <div className="flex flex-col sm:flex-row items-center gap-4">
                 <Button href="/start?plan=trial" variant="primary" size="lg">
-                  Start 7-Day Free Trial
+                  Start 3-Day Free Trial
                 </Button>
                 <Button href="/start?plan=now" variant="secondary" size="lg">
                   Skip the trial, subscribe now

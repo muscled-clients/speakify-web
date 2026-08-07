@@ -79,8 +79,8 @@ export default async function Account({
             {!sub ? (
               <>
                 <p className="text-sm text-zinc-400 mb-6 leading-relaxed">
-                  You&apos;re not subscribed yet. Start your 7-day free trial: full access to everything,
-                  and you won&apos;t be charged until day 8.
+                  You&apos;re not subscribed yet. Start your 3-day free trial: full access to everything,
+                  and you won&apos;t be charged until day 4.
                 </p>
                 <div className="flex flex-col gap-3">
                   <AccountActions kind="checkout" plan="trial" />

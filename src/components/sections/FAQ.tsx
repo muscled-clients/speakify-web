@@ -8,7 +8,7 @@ const FAQS = [
   {
     question: "How does the free trial work?",
     answer:
-      "You get full access to everything for 7 days. A card is required to start, but you won't be charged until day 8. Cancel anytime before then and you pay nothing. Cancellation is self-serve from your account page.",
+      "You get full access to everything for 3 days. A card is required to start, but you won't be charged until day 4. Cancel anytime before then and you pay nothing. Cancellation is self-serve from your account page.",
   },
   {
     question: "What if it doesn't work for me?",

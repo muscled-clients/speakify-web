@@ -5,7 +5,7 @@ export type CheckoutPlan = 'trial' | 'now'
 
 /**
  * Creates a Stripe Checkout session for a signed-in user and returns its URL.
- * plan 'trial': 7-day trial, card required (skipped automatically for anyone
+ * plan 'trial': 3-day trial, card required (skipped automatically for anyone
  * with a prior subscription — one trial per user).
  * plan 'now': no trial, charged immediately (the "I'm convinced" path).
  */
@@ -39,7 +39,7 @@ export async function createCheckoutSession(
   const wantsTrial = plan === 'trial' && !hadSubscription
   const subscriptionData: Record<string, unknown> = { metadata: { user_id: user.id } }
   if (wantsTrial) {
-    subscriptionData.trial_period_days = 7
+    subscriptionData.trial_period_days = 3
     subscriptionData.trial_settings = { end_behavior: { missing_payment_method: 'cancel' } }
   }
 

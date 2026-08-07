@@ -42,7 +42,7 @@ export function Hero() {
             <ArrowRight className="w-4 h-4" />
           </Button>
         </div>
-        <p className="text-sm text-zinc-500 mb-16">7 days free, then $20/month. Cancel anytime.</p>
+        <p className="text-sm text-zinc-500 mb-16">3 days free, then $20/month. Cancel anytime.</p>
 
         {/* App mockup: recording window */}
         <div className="relative max-w-2xl mx-auto">

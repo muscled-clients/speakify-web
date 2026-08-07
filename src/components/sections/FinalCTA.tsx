@@ -12,7 +12,7 @@ export function FinalCTA() {
           Start speaking. Stop typing.
         </h2>
         <p className="text-lg text-zinc-400 max-w-xl mx-auto mb-10">
-          Try Speakify free for 7 days and experience voice-to-text that actually respects your privacy.
+          Try Speakify free for 3 days and experience voice-to-text that actually respects your privacy.
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <Button href="/start?plan=trial" variant="primary" size="lg">

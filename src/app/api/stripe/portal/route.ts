@@ -3,6 +3,9 @@ import { auth } from '@/lib/auth/auth'
 import { getStripe } from '@/lib/stripe'
 import { query } from '@/lib/db/pool'
 
+export const dynamic = 'force-dynamic'
+export const runtime = 'nodejs'
+
 /** POST /api/stripe/portal — returns a Stripe Customer Portal session URL for the logged-in user. */
 export async function POST(req: NextRequest) {
   const session = await auth.api.getSession({ headers: req.headers })

@@ -41,11 +41,9 @@ export const auth = betterAuth({
 
   plugins: [nextCookies()],
 
-  secret: (() => {
-    const s = process.env.BETTER_AUTH_SECRET
-    if (!s) throw new Error('BETTER_AUTH_SECRET is required')
-    return s
-  })(),
+  // Missing secret is an error at auth-op time, not at import time — this file is imported
+  // during `next build` when env vars aren't populated, and we don't want that to blow up.
+  secret: process.env.BETTER_AUTH_SECRET || 'build-time-placeholder-not-usable',
 
   baseURL: process.env.BETTER_AUTH_URL || process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3007',
 

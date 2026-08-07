@@ -3,6 +3,9 @@ import { auth } from '@/lib/auth/auth'
 import { getStripe, priceIdMonthly } from '@/lib/stripe'
 import { query } from '@/lib/db/pool'
 
+export const dynamic = 'force-dynamic'
+export const runtime = 'nodejs'
+
 /**
  * POST /api/stripe/create-checkout
  *

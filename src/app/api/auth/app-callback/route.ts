@@ -6,6 +6,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { auth } from '@/lib/auth/auth'
 
+export const dynamic = 'force-dynamic'
+export const runtime = 'nodejs'
+
 const SCHEME = 'speakify'
 
 export async function GET(request: NextRequest) {

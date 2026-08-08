@@ -2,6 +2,7 @@ import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { auth } from "@/lib/auth/auth";
 import { query } from "@/lib/db/pool";
+import { getStripe } from "@/lib/stripe";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { CheckCircle2, Download } from "lucide-react";
@@ -14,6 +15,7 @@ interface SubRow {
   current_period_end: string | null;
   trial_end: string | null;
   cancel_at_period_end: boolean;
+  stripe_subscription_id: string | null;
 }
 
 const STATUS_META: Record<string, { label: string; classes: string }> = {
@@ -40,11 +42,31 @@ export default async function Account({
   const justCheckedOut = params.checkout === "success";
 
   const { rows } = await query<SubRow>(
-    `SELECT status, current_period_end, trial_end, cancel_at_period_end
+    `SELECT status, current_period_end, trial_end, cancel_at_period_end, stripe_subscription_id
      FROM subscriptions WHERE user_id = $1`,
     [session.user.id]
   );
   const sub = rows[0] ?? null;
+
+  // Actual monthly amount after any discount (founder comps, promo codes).
+  // Falls back to the standard price if Stripe is unreachable.
+  let monthly = "$20";
+  if (sub?.stripe_subscription_id && (sub.status === "active" || sub.status === "trialing")) {
+    try {
+      const s = await getStripe().subscriptions.retrieve(sub.stripe_subscription_id, {
+        expand: ["discounts"],
+      });
+      let cents = s.items.data[0]?.price.unit_amount ?? 2000;
+      const discount = (s.discounts?.[0] ?? null) as { coupon?: { percent_off?: number | null; amount_off?: number | null } } | string | null;
+      if (discount && typeof discount !== "string" && discount.coupon) {
+        if (discount.coupon.percent_off) cents = Math.round(cents * (1 - discount.coupon.percent_off / 100));
+        if (discount.coupon.amount_off) cents = Math.max(0, cents - discount.coupon.amount_off);
+      }
+      monthly = cents % 100 === 0 ? `$${cents / 100}` : `$${(cents / 100).toFixed(2)}`;
+    } catch {
+      // keep fallback
+    }
+  }
   const meta = sub ? STATUS_META[sub.status] ?? { label: sub.status, classes: "bg-zinc-500/15 text-zinc-400 border-zinc-500/30" } : null;
 
   return (
@@ -81,14 +103,7 @@ export default async function Account({
                 <p className="text-sm text-zinc-400 mb-6 leading-relaxed">
                   You&apos;re not subscribed yet. Subscribe for full access to everything on your personal Macs.
                 </p>
-                <div className="flex flex-col gap-3">
-                  <AccountActions kind="checkout" plan="trial" />
-                  <AccountActions
-                    kind="checkout"
-                    plan="now"
-                    label="Skip the trial, subscribe now for $20/month"
-                  />
-                </div>
+                <AccountActions kind="checkout" plan="now" label="Subscribe for $20/month" />
               </>
             ) : (
               <>
@@ -96,12 +111,14 @@ export default async function Account({
                   {sub.status === "trialing" && sub.trial_end && (
                     <p className="text-sm text-zinc-300">
                       Trial ends <span className="font-medium text-zinc-100">{fmt(sub.trial_end)}</span>
-                      {". "}Your card is charged $20/month after that.
+                      {". "}Your card is charged {monthly}/month after that.
                     </p>
                   )}
                   {sub.status === "active" && sub.current_period_end && (
                     <p className="text-sm text-zinc-300">
-                      Renews <span className="font-medium text-zinc-100">{fmt(sub.current_period_end)}</span> at $20/month.
+                      {monthly === "$0"
+                        ? <>Renews <span className="font-medium text-zinc-100">{fmt(sub.current_period_end)}</span>. Free account, nothing will be charged.</>
+                        : <>Renews <span className="font-medium text-zinc-100">{fmt(sub.current_period_end)}</span> at {monthly}/month.</>}
                     </p>
                   )}
                   {sub.status === "past_due" && (

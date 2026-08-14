@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/Button";
-import { WaveformVisualizer } from "@/components/ui/WaveformVisualizer";
+import { DictationEditorMock } from "@/components/ui/DictationEditorMock";
 import { Download, ArrowRight } from "lucide-react";
 
 export function Hero() {
@@ -44,24 +44,11 @@ export function Hero() {
         </div>
         <p className="text-sm text-zinc-500 mb-16">$20/month. Cancel anytime. 14-day money-back guarantee.</p>
 
-        {/* App mockup: recording window */}
-        <div className="relative max-w-2xl mx-auto">
-          <div className="bg-zinc-900/80 border border-zinc-800/50 rounded-2xl p-6 md:p-8 backdrop-blur-sm">
-            {/* Waveform */}
-            <div className="flex items-center justify-center mb-6">
-              <WaveformVisualizer />
-            </div>
-            {/* Bottom bar */}
-            <div className="flex items-center justify-between">
-              <div className="text-left">
-                <p className="text-lg font-bold text-zinc-100">Speakify</p>
-                <p className="text-sm text-zinc-500">by Unpuzzle</p>
-              </div>
-              <p className="text-sm text-zinc-500">esc to cancel</p>
-            </div>
-          </div>
-          <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-3/4 h-16 bg-blue-500/10 blur-3xl rounded-full pointer-events-none" />
-        </div>
+        {/* App mockup: the live dictation editor */}
+        <DictationEditorMock />
+        <p className="text-xs text-zinc-600 mt-12">
+          Watch your words land live, click anywhere to fix a mistake, keep talking. Ctrl+Space pastes the final text.
+        </p>
       </div>
     </section>
   );

@@ -12,16 +12,16 @@ const STEPS = [
   {
     number: "2",
     icon: Cpu,
-    title: "On-Device Processing",
+    title: "Watch It Land Live",
     description:
-      "whisper.cpp transcribes your audio using Metal GPU acceleration. Nothing leaves your Mac.",
+      "Your words appear in a live editor as you speak, transcribed on-device with Metal acceleration. Click anywhere to fix a word and keep talking. Nothing leaves your Mac.",
   },
   {
     number: "3",
     icon: ClipboardPaste,
-    title: "Text Appears",
+    title: "Paste When Ready",
     description:
-      "Clean, corrected text is auto-pasted exactly where your cursor was. That's it.",
+      "Hit Ctrl+Space again and the text, exactly as you edited it, pastes where your cursor was. That's it.",
   },
 ];
 

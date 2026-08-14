@@ -6,7 +6,7 @@ const FEATURES = [
     icon: Keyboard,
     title: "Global Hotkey",
     description:
-      "Press Ctrl+Space from any app to start dictating. No need to switch windows or click anything.",
+      "Press Ctrl+Space from any app and watch your words land in a live editor. Fix anything with a click, recall past dictations with Ctrl+Up, paste when ready.",
   },
   {
     icon: ClipboardPaste,

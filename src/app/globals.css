@@ -96,3 +96,32 @@ body {
     animation: none;
   }
 }
+
+/* Dictation editor mock: chunk arrival + caret */
+@keyframes dm-chunk-in {
+  from {
+    opacity: 0;
+    transform: translateY(3px);
+    filter: blur(3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+.dm-chunk {
+  display: inline;
+  animation: dm-chunk-in 0.4s ease-out both;
+}
+@keyframes dm-caret-blink {
+  0%, 45% { opacity: 1; }
+  55%, 100% { opacity: 0; }
+}
+.dm-caret {
+  animation: dm-caret-blink 1.1s steps(1, end) infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .dm-chunk { animation: none; }
+  .dm-caret { animation: none; opacity: 1; }
+}

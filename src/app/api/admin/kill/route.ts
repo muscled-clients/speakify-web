@@ -51,13 +51,13 @@ export async function POST(req: NextRequest) {
 
   if (action === 'deactivate') {
     await query(`UPDATE "user" SET revoked_at = NOW() WHERE id = $1`, [user.id])
-    const sessions = await query(`DELETE FROM "session" WHERE "userId" = $1`, [user.id])
-    console.log(`[admin/kill] DEACTIVATED ${user.email} (${sessions.rowCount} sessions revoked)`)
+    const sessions = await query(`DELETE FROM "session" WHERE "userId" = $1 RETURNING id`, [user.id])
+    console.log(`[admin/kill] DEACTIVATED ${user.email} (${sessions.rows.length} sessions revoked)`)
     return NextResponse.json({
       ok: true,
       action: 'deactivate',
       email: user.email,
-      sessions_revoked: sessions.rowCount,
+      sessions_revoked: sessions.rows.length,
       note: 'Bearer tokens are dead now; the Mac app locks on its next status check (<=1h, or instantly on app focus).',
     })
   }

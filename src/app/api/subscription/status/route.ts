@@ -20,6 +20,23 @@ export async function GET(req: NextRequest) {
   const session = await auth.api.getSession({ headers: req.headers })
   if (!session?.user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
+  // Admin kill switch: a revoked account is locked regardless of billing state.
+  const revokedCheck = await query<{ revoked_at: string | null }>(
+    `SELECT revoked_at FROM "user" WHERE id = $1`,
+    [session.user.id]
+  )
+  if (revokedCheck.rows[0]?.revoked_at != null) {
+    return NextResponse.json({
+      entitled: false,
+      status: 'revoked',
+      current_period_end: null,
+      trial_end: null,
+      cancel_at_period_end: false,
+      server_time_ms: Date.now(),
+      user: { id: session.user.id, email: session.user.email, name: session.user.name },
+    })
+  }
+
   const { rows } = await query<{
     status: string
     current_period_end: string | null
